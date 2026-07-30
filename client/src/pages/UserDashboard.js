@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import axios from '../axios';
 import UserForm from '../components/UserForm';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 
 function UserDashboard() {
   const [users, setUsers] = useState([]);
@@ -10,7 +10,7 @@ function UserDashboard() {
   const formRef = useRef(null);
 
   const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     if (!user) {
@@ -18,7 +18,7 @@ function UserDashboard() {
     } else {
       fetchUsers();
     }
-  }, [user, navigate]);
+  }, [user]);
 
   const fetchUsers = () => {
     axios

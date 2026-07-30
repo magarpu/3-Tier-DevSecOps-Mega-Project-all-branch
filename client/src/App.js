@@ -1,6 +1,5 @@
-// client/src/App.js
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Switch, Route } from 'wouter';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import UserDashboard from './pages/UserDashboard';
@@ -10,13 +9,13 @@ import Layout from './components/Layout';
 function App() {
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Switch>
+        <Route path="/" component={Login} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/dashboard" component={UserDashboard} />
+        <Route component={NotFound} />
+      </Switch>
     </Layout>
   );
 }

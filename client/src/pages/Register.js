@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useLocation, Link } from 'wouter';
 import logo from '../logo.svg';
 
 function Register() {
   const { register } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
 
