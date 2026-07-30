@@ -17,6 +17,10 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);    // 🔐 Login/Register
 app.use('/api/users', userRoutes);   // 👤 User management
 
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', message: 'Backend is running' });
+});
+
 // Auto-create or reset admin user
 const initAdminUser = async () => {
   const name = 'Admin User';
@@ -62,9 +66,11 @@ const initAdminUser = async () => {
 };
 
 // Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
+const PORT = Number(process.env.PORT || 5001);
+const HOST = process.env.HOST || '127.0.0.1';
+
+app.listen(PORT, HOST, () => {
+  console.log(`🚀 Server running on http://${HOST}:${PORT}`);
   initAdminUser(); // 👤 Ensure admin exists on boot
 });
 
